@@ -81,7 +81,6 @@ namespace PortalPacjenta.App_Start
               "~/Content/themes/base/datepicker.css",
               "~/Content/themes/base/progressbar.css",
               "~/Content/themes/base/theme.css"));
-
         }
     }
 }

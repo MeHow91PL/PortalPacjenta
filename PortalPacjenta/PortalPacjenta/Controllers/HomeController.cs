@@ -9,7 +9,8 @@ using System.Web.Mvc;
 
 namespace PortalPacjenta.Controllers
 {
-    public class PortalPacjentaController : PortalPacjentaMasterController
+    [Authorize]
+    public class HomeController : PortalPacjentaMasterController
     {
         SopelContext db = new SopelContext();
          

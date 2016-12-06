@@ -51,7 +51,7 @@ namespace PortalPacjenta.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Logowanie(LoginViewModel model, string returnUrl, string system)
+        public async Task<ActionResult> Logowanie(LoginViewModel model, string returnUrl)
         {
             if (!ModelState.IsValid)
             {
@@ -64,46 +64,46 @@ namespace PortalPacjenta.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl, system);
+                    return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.Zapamietaj });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
+                    ModelState.AddModelError("loginError", "Podany login lub hasło są błędne");
                     return View(model);
             }
         }
 
-        private ActionResult RedirectToLocal(string returnUrl, string system)
+        private ActionResult RedirectToLocal(string returnUrl)
         {
             if (Url.IsLocalUrl(returnUrl))
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Logowanie", system);
+            return RedirectToAction("Logowanie");
         }
 
 
-        // GET: /Account/Register
+        // GET: /Account/Rejestracja
         [AllowAnonymous]
-        public ActionResult Register()
+        public ActionResult Rejestracja()
         {
             return View();
         }
 
         //
-        // POST: /Account/Register
+        // POST: /Account/Rejestracja
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Rejestracja(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
+                var user = new ApplicationUser { UserName = model.Login, Email = model.Email};
+                var result = await UserManager.CreateAsync(user, model.Haslo);
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);

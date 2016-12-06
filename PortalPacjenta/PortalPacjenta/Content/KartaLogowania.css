@@ -14,6 +14,12 @@
             border-radius: 5px;
         }
 
+#formularzKartyLogowania .errorMessages {
+    margin: 0 0 20px;
+    padding: 15px;
+}
+
+
 #formularzKartyLogowania .buttonFotterContainer {
     text-align: right;
 }
@@ -30,34 +36,34 @@
         transition: 100MS;
     }
 
-     #formularzKartyLogowania .buttonFotterContainer input:hover {
-        background: #5f9db7;
-    }
+        #formularzKartyLogowania .buttonFotterContainer input:hover {
+            background: #5f9db7;
+        }
 
-      #formularzKartyLogowania .buttonFotterContainer input:active {
-        background: #3a6f86;
-    }
+        #formularzKartyLogowania .buttonFotterContainer input:active {
+            background: #3a6f86;
+        }
 
-     #formularzKartyLogowania .buttonFotterContainer input:first-child {
-        margin-right:10px;
-    }
+        #formularzKartyLogowania .buttonFotterContainer input:first-child {
+            margin-right: 10px;
+        }
 
 #formularzKartyLogowania .portalExtraButtons {
     text-align: right;
 }
 
-#formularzKartyLogowania .portalExtraButtons a:last-child{
-    color:#3c7515;
-}
+    #formularzKartyLogowania .portalExtraButtons a:last-child {
+        color: #3c7515;
+    }
 
-#formularzKartyLogowania .portalExtraButtons a:hover {
-    text-decoration:none;
-    opacity:0.5;
-    -moz-transition: 100ms;
-    -o-transition: 100ms;
-    -webkit-transition: 100ms;
-    transition: 100ms;
-}
+    #formularzKartyLogowania .portalExtraButtons a:hover {
+        text-decoration: none;
+        opacity: 0.5;
+        -moz-transition: 100ms;
+        -o-transition: 100ms;
+        -webkit-transition: 100ms;
+        transition: 100ms;
+    }
 
 #formularzKartyLogowania field-validation-error {
     display: block;
