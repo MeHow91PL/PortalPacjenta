@@ -16,11 +16,12 @@
     <div id="tlo">
         <div class="wysrodkujCentralnie">
             <div id="kartaLogowania" class="kontenerOkienka">
+                <div class="errorMessages">
+                    @Html.ValidationMessage("loginError", "")
+                </div>
                 <form id="formularzKartyLogowania" class="form-horizontal" returnUrl="@ViewBag.ReturnUrl" method="post" action="@Url.Action("Rejestracja","Account")">
                     @Html.AntiForgeryToken()
-                    <div class="errorMessages">
-                        @Html.ValidationMessage("loginError", "")
-                    </div>
+                   
                     <div class="row">
                         <div class="form-group">
                             @Html.LabelFor(m => m.Login, new { @class = "col-sm-2 col-md-2 col-lg-2 control-label" })

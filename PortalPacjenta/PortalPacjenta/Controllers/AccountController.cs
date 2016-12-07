@@ -41,9 +41,9 @@ namespace PortalPacjenta.Controllers
 
         // GET: /Account/Logowanie
         [AllowAnonymous]
-        public ActionResult Logowanie(string returnUrl)
+        public ActionResult Logowanie(string ReturnUrl)
         {
-            ViewBag.ReturnUrl = returnUrl;
+            ViewBag.ReturnUrl = ReturnUrl;
             return View();
         }
 
@@ -51,7 +51,7 @@ namespace PortalPacjenta.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Logowanie(LoginViewModel model, string returnUrl)
+        public async Task<ActionResult> Logowanie(LoginViewModel model, string ReturnUrl)
         {
             if (!ModelState.IsValid)
             {
@@ -64,11 +64,11 @@ namespace PortalPacjenta.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToLocal(ReturnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.Zapamietaj });
+                    return RedirectToAction("SendCode", new { ReturnUrl = ReturnUrl, RememberMe = model.Zapamietaj });
                 case SignInStatus.Failure:
                 default:
                     ModelState.AddModelError("loginError", "Podany login lub hasło są błędne");

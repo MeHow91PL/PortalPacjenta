@@ -257,6 +257,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\Mapa.cs" />
     <Compile Include="Infrastructure\PortalPacjentaMasterController.cs" />
     <Compile Include="Infrastructure\PrzychodniaMasterController.cs" />
     <Compile Include="Migrations\201612061914292_InitPortal.cs" />
@@ -305,7 +306,7 @@
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\Logowanie.cshtml" />
-    <Content Include="Views\RejestracjaOnline\index.cshtml" />
+    <Content Include="Views\RejestracjaOnline\Index.cshtml" />
     <Content Include="Views\RejestracjaOnline\SiatkaTerminarza.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />

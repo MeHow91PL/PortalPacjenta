@@ -20,7 +20,7 @@ namespace PortalPacjenta.Controllers
         {
             var model = pobierzTerminarzViewModel(DateTime.Today.ToString("yyyy-MM-dd"));
 
-            return View("~/Views/PortalPacjenta/RejestracjaOnline/Index.cshtml", model);
+            return View("Index", model);
         }
 
         private TerminarzViewModel pobierzTerminarzViewModel(string wybranaData = null, int pracownikId = 0)
