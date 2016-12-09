@@ -7,13 +7,13 @@ namespace PortalPacjenta.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class InitPortal : IMigrationMetadata
+    public sealed partial class init : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitPortal));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(init));
         
         string IMigrationMetadata.Id
         {
-            get { return "201612061914292_InitPortal"; }
+            get { return "201612072101091_init"; }
         }
         
         string IMigrationMetadata.Source
