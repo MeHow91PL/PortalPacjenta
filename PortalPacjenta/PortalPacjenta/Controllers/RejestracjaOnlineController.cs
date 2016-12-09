@@ -15,15 +15,17 @@ namespace PortalPacjenta.Controllers
         SopelContext db = new SopelContext();
 
 
-        // GET: Rejestracja
+        // GET: RejestracjaOnline
         public ActionResult Index()
         {
-            var model = pobierzTerminarzViewModel(DateTime.Today.ToString("yyyy-MM-dd"));
-
+            var model = pobierzTerminarzViewModels(DateTime.Today.ToString("yyyy-MM-dd"));
+            ViewBag.GodzOd = model.opcje.Single(o => o.Nazwa == "term_godz_od").Wartosc;
+            ViewBag.GodzDo = model.opcje.Single(o => o.Nazwa == "term_godz_do").Wartosc;
+            ViewBag.CzasWiz = model.opcje.Single(o => o.Nazwa == "term_czas_wiz").Wartosc;
             return View("Index", model);
         }
 
-        private TerminarzViewModel pobierzTerminarzViewModel(string wybranaData = null, int pracownikId = 0)
+        private TerminarzViewModels pobierzTerminarzViewModels(string wybranaData = null, int pracownikId = 0)
         {
             List<Opcja> opcje = null;
             List<Pracownik> prac = null;
@@ -56,20 +58,20 @@ namespace PortalPacjenta.Controllers
             }
 
             opcje = db.Opcje.ToList();
-            var model = new TerminarzViewModel { opcje = opcje, pracownicy = prac, rezerwacje = rez };
+            var model = new TerminarzViewModels { opcje = opcje, pracownicy = prac, rezerwacje = rez };
 
             return model;
         }
 
         public ViewResult pobierzTerminarzWybranegoLekarza(string data, int idi = 0)
         {
-            var model = pobierzTerminarzViewModel(data, idi);
+            var model = pobierzTerminarzViewModels(data, idi);
 
             ViewBag.GodzOd = model.opcje.Single(o => o.Nazwa == "term_godz_od").Wartosc;
             ViewBag.GodzDo = model.opcje.Single(o => o.Nazwa == "term_godz_do").Wartosc;
             ViewBag.CzasWiz = model.opcje.Single(o => o.Nazwa == "term_czas_wiz").Wartosc;
 
-            return View("~/Views/PortalPacjenta/RejestracjaOnline/SiatkaTerminarza.cshtml", model);
+            return View("SiatkaTerminarza", model);
         }
 
         public JsonResult pobiarzWybranaSpecjalizacje(string spec = "")
@@ -84,7 +86,48 @@ namespace PortalPacjenta.Controllers
             }
         }
 
-            
+        public PartialViewResult WyświetlKartęRezerwacji(string dataRez, int idLek, string godzRez)
+        {
+
+            var rez = new Rezerwacja { DataRezerwacji = DateTime.Parse(dataRez), godzOd = godzRez, PracownikID = idLek };
+
+            var model = new KartaRezerwacji() { Rezerwacja = rez, Pacjent = new Pacjent() };
+            return PartialView("KartaRezerwacji", model);
+        }
+
+        public ActionResult ZapiszRezerwacje(KartaRezerwacji kartaRezerwacji)
+        {
+            kartaRezerwacji.Rezerwacja.DataModyfikacji = DateTime.Now;
+            string pesel = kartaRezerwacji.Pacjent.Pesel;
+            string dataUrodzenia = "";
+
+            if (Convert.ToInt32(pesel.Substring(2, 1)) > 1)
+            {
+                dataUrodzenia = "20" + pesel.Substring(0, 2) + "-" + pesel.Substring(2, 2) + "-" + pesel.Substring(4, 2);
+            }
+            else
+            {
+                dataUrodzenia = "19" + pesel.Substring(0, 2) + "-" + pesel.Substring(2, 2) + "-" + pesel.Substring(4, 2);
+            }
+
+
+            if (db.Pacjenci.Any(p => p.Pesel == kartaRezerwacji.Pacjent.Pesel))
+            {
+                kartaRezerwacji.Rezerwacja.PacjentID = db.Pacjenci.Single(p => p.Pesel == kartaRezerwacji.Pacjent.Pesel).ID;
+            }
+            else
+            {
+                kartaRezerwacji.Pacjent.DataUrodzenia = DateTime.Parse(dataUrodzenia);
+                kartaRezerwacji.Rezerwacja.Pacjent = kartaRezerwacji.Pacjent;
+                db.Pacjenci.Add(kartaRezerwacji.Pacjent);
+            }
+
+            db.Rezerwacje.Add(kartaRezerwacji.Rezerwacja);
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
 
         public JsonResult ListaPracownikow(string spec)
         {

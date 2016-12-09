@@ -1,4 +1,4 @@
-﻿@model PortalPacjenta.ViewModels.TerminarzViewModel
+﻿@model PortalPacjenta.ViewModels.TerminarzViewModels
 
 <table class="table table-bordered terminarz">
     <tr>
@@ -50,7 +50,7 @@
                         }
                         else
                         {
-                            <td id="@Model.pracownicy[y].ID-@timeString" class="panel-rezerwacji wolny-termin" data-action-url="@Url.Action("pokazOknoRezerwacji", "RejestracjaOnline")">Umów wizytę</td>
+                            <td id="@Model.pracownicy[y].ID-@timeString" class="panel-rezerwacji wolny-termin" onclick="wyswietlOknoRezerwacji(this)" data-action-url="@Url.Action("pokazOknoRezerwacji", "RejestracjaOnline")">Umów wizytę</td>
                         }
                     }
                 }
@@ -60,3 +60,29 @@
                     }
     }
 </table>
+
+<script>
+    /// <reference path="jquery-3.1.1.js" />
+    function wyswietlOknoRezerwacji(panelRezerwacji) {
+        var splitId = $(panelRezerwacji).attr("id").split("-");
+        var idLekarza = splitId[0];
+        var godzinaRezerwacji = splitId[1];
+
+        $("#kartaRezerwacjiWizytyKontener").css("display", "flex");
+        $.ajax({
+            url: "/RejestracjaOnline/WyświetlKartęRezerwacji",
+            type: 'POST',
+            data: {
+                dataRez: $('#dataRezerwacji').val(),
+                idLek: idLekarza,
+                godzRez: godzinaRezerwacji
+            },
+            success: function (response) {
+                $("#kartaRezerwacjiWizytyKontener").html(response);
+            },
+            error: function () {
+                alert("Error");
+            }
+        });
+    }
+</script>

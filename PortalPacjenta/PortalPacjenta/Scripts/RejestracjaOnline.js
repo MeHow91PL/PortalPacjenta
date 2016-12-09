@@ -5,7 +5,8 @@ $(document).ready(function () {
     var $dataRezerwacji = $('#dataRezerwacji');
     var $wyborLekarza = $('#wyborLekarzaRejOnline');
     var $wyborSpecjalizacji = $('#wyborSpecjalizacjiPortalPacjenta');
-
+    var $kartaRezerwacji = $("#kartaRezerwacji");
+    
 
     var podpowiedzi = $('#podpowiedzi'); wyborLekarzaRejOnline
     var dataRezerwacji = $dataRezerwacji.val();
@@ -86,6 +87,10 @@ $(document).ready(function () {
         selectedLekarz = $wyborLekarza.children(":selected").attr("id");
 
     });
+
+    //$(".wolny-termin").click(function () {
+    //   $kartaRezerwacji.css("display", "block");
+    //});
 
 
 

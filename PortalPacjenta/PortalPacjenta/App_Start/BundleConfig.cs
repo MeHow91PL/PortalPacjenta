@@ -29,6 +29,12 @@ namespace PortalPacjenta.App_Start
             bundles.Add(new ScriptBundle("~/Scripts/Terminarz").Include(
                         "~/Scripts/Terminarz.js"));
 
+            bundles.Add(new ScriptBundle("~/Scripts/Account").Include(
+             "~/Scripts/Account.js"));
+
+            bundles.Add(new ScriptBundle("~/Scripts/Walidacje").Include(
+            "~/Scripts/Walidacje.js"));
+
             bundles.Add(new ScriptBundle("~/Scripts/RejestracjaOnline").Include(
                         "~/Scripts/RejestracjaOnline.js"));
 
@@ -44,10 +50,8 @@ namespace PortalPacjenta.App_Start
             bundles.Add(new StyleBundle("~/Content/Layout").Include(
                       "~/Content/reset.css",
                       "~/Content/Site.css",
-                      "~/Content/SidebarModuly.css",
-                      "~/Content/PortalPacjenta.css",
-                      "~/Content/Przychodnia.css",
-                      "~/Content/KartaRezerwacjiPrzychodnia.css",
+                      "~/Content/Layout.css",
+                      "~/Content/KartaRezerwacji.css",
                       "~/Content/KartaLogowania.css",
                       "~/Content/KartaRezerwacjiPortalPacjentaNiezalogowany.css"));
 

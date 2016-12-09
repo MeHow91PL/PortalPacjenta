@@ -6,6 +6,8 @@ using PortalPacjenta.ViewModels;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using System;
 
 namespace PortalPacjenta.Controllers
 {
@@ -39,9 +41,10 @@ namespace PortalPacjenta.Controllers
             }
         }
 
+
         // GET: /Account/Logowanie
         [AllowAnonymous]
-        public ActionResult Logowanie(string ReturnUrl)
+        public ActionResult Logowanie(string ReturnUrl = "/Home/Index")
         {
             ViewBag.ReturnUrl = ReturnUrl;
             return View();
@@ -51,13 +54,13 @@ namespace PortalPacjenta.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Logowanie(LoginViewModel model, string ReturnUrl)
+        public async Task<ActionResult> Logowanie(LoginViewModel model, string ReturnUrl = "/Home/Index")
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-
+            
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Login, model.Haslo, model.Zapamietaj, shouldLockout: false);
@@ -86,12 +89,19 @@ namespace PortalPacjenta.Controllers
         }
 
 
-        // GET: /Account/Rejestracja
-        [AllowAnonymous]
+        public ActionResult Wyloguj()
+        {
+            var AutheticationManager = HttpContext.GetOwinContext().Authentication;
+            AutheticationManager.SignOut();
+
+            return RedirectToAction("Logowanie");
+        }
+
         public ActionResult Rejestracja()
         {
             return View();
         }
+
 
         //
         // POST: /Account/Rejestracja
@@ -116,11 +126,19 @@ namespace PortalPacjenta.Controllers
 
                     return RedirectToAction("Index", "Home");
                 }
-                //AddErrors(result);
+                AddErrors(result);
             }
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        private void AddErrors(IdentityResult result)
+        {
+            foreach (var item in result.Errors)
+            {
+                ModelState.AddModelError("rejestracjaError", item);
+            }
         }
     }
 }
