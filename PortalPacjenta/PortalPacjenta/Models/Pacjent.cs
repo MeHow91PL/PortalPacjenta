@@ -17,7 +17,7 @@ namespace PortalPacjenta.Models
             Aktw = "T";
         }
         [DataType(DataType.Date)]
-        [RegularExpression(@"([0-9]{4}-[0-9]{2}-[0-9]{2})$")]
+        //[RegularExpression(@"([0-9]{4}-[0-9]{2}-[0-9]{2})$")]
         public DateTime? DataUrodzenia { get; set; }
 
         [RegularExpression(@"([M,K]{1})$")]

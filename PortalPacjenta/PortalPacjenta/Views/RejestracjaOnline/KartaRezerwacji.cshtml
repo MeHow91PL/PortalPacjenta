@@ -1,0 +1,72 @@
+﻿@model PortalPacjenta.ViewModels.KartaRezerwacji
+
+
+<div id="kartaRezerwacjiWizyty" class="kontenerOkienka">
+    <form id="formularzKartyRezerwacji" method="post" action="@Url.Action("ZapiszRezerwacje","RejestracjaOnline")">
+        <div class="row">
+            <div class="col-lg-8 col-md-8 col-sm-8">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    @Html.LabelFor(m => m.Pacjent.Imie)
+                    @Html.TextBoxFor(m => m.Pacjent.Imie, new { @class = "form-control", @autocomplete = "off" })
+                    @Html.ValidationMessageFor(m => m.Pacjent.Imie)
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    @Html.LabelFor(m => m.Pacjent.Nazwisko)
+                    @Html.TextBoxFor(m => m.Pacjent.Nazwisko, new { @class = "form-control", @autocomplete = "off" })
+                    @Html.ValidationMessageFor(m => m.Pacjent.Nazwisko)
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    @Html.LabelFor(m => m.Pacjent.Pesel)
+                    @Html.TextBoxFor(m => m.Pacjent.Pesel, new { @class = "form-control", @onkeyup = "walidujKarteRezerwacji()", @autocomplete = "off" })
+                    <span class="errorMessage" id="peselErrorMessageSpan"></span>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    @Html.LabelFor(m => m.Pacjent.DokumentTozsamosci)
+                    @Html.TextBoxFor(m => m.Pacjent.DokumentTozsamosci, new { @class = "form-control", @autocomplete = "off", @placeholder = "np. ABC123456", @onkeyup = "walidujKarteRezerwacji()" })
+                    <span class="errorMessage" id="dokTozsamosciErrorMessageSpan"></span>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    @Html.LabelFor(m => m.Pacjent.Telefon)
+                    @Html.TextBoxFor(m => m.Pacjent.Telefon, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Pacjent.Telefon)
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    @Html.LabelFor(m => m.Pacjent.Email)
+                    @Html.TextBoxFor(m => m.Pacjent.Email, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Pacjent.Email)
+                </div><div class="col-lg-6 col-md-6 col-sm-6">
+                    @Html.LabelFor(m => m.Rezerwacja.godzOd)
+                    @Html.TextBoxFor(m => m.Rezerwacja.godzOd, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Rezerwacja.godzOd)
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    @Html.LabelFor(m => m.Rezerwacja.DataRezerwacji)
+                    @Html.TextBoxFor(m => m.Rezerwacja.DataRezerwacji, "{0:yyyy-MM-dd}", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Rezerwacja.DataRezerwacji)
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-sm-4">
+
+                <div id="kartaRezerwacjiPortalPacjentaNiezalogowanyZdjeciePacjenta" class="hidden-xs">
+                    <img class="img-responsive" src="~/Content/Images/userIcon.png" alt="Pacjent" />
+                </div>
+            </div>
+
+
+            <input class="idRezerwacji" type="hidden" value="" name="idRez" id="idRez" />
+            @Html.TextBoxFor(m => m.Pacjent.Plec, new { @type = "hidden" })
+            @Html.HiddenFor(m => m.Rezerwacja.PracownikID)
+
+        </div>
+        <div class="" id="kartaRezerwacjiButtonKontener">
+            <input type="submit" onclick="zapiszKarteRezerwacji()" class="col-lg-offset-5 col-lg-3 col-md-offset-5 col-md-3 col-sm-offset-5 col-sm-3" value="Zapisz" />
+            <input type="button" class="col-lg-offset-1 col-lg-3 col-md-offset-1 col-md-3 col-sm-offset-1 col-sm-3" value="Anuluj" />
+        </div>
+    </form>
+
+</div>
+
+<script>
+  
+</script>

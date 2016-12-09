@@ -6,10 +6,16 @@ using System.Web;
 
 namespace PortalPacjenta.ViewModels
 {
-    public class TerminarzViewModel
+    public class TerminarzViewModels
     {
         public List<Pracownik> pracownicy { get; set; }
         public ICollection<Rezerwacja> rezerwacje { get; set; }
         public ICollection<Opcja>opcje { get; set; }
+    }
+
+    public class KartaRezerwacji
+    {
+        public Pacjent Pacjent { get; set; }
+        public Rezerwacja Rezerwacja { get; set; }
     }
 }

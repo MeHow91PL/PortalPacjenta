@@ -16,16 +16,16 @@
     <div id="tlo">
         <div class="wysrodkujCentralnie">
             <div id="kartaLogowania" class="kontenerOkienka">
-                <div class="errorMessages">
-                    @Html.ValidationMessage("loginError", "")
-                </div>
+              
                 <form id="formularzKartyLogowania" class="form-horizontal" returnUrl="@ViewBag.ReturnUrl" method="post" action="@Url.Action("Rejestracja","Account")">
                     @Html.AntiForgeryToken()
-                   
+                    <div class="errorMessages">
+                        @Html.ValidationMessage("rejestracjaError", "")
+                    </div>
                     <div class="row">
                         <div class="form-group">
-                            @Html.LabelFor(m => m.Login, new { @class = "col-sm-2 col-md-2 col-lg-2 control-label" })
-                            <div class="col-sm-10 col-md-10 col-lg-10">
+                            @Html.LabelFor(m => m.Login, new { @class = "col-sm-4 col-md-4 col-lg-4 control-label" })
+                            <div class="col-sm-8 col-md-8 col-lg-8">
                                 @Html.TextBoxFor(m => m.Login, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(m => m.Login)
                             </div>
@@ -33,8 +33,8 @@
                     </div>
                     <div class="row">
                         <div class="form-group">
-                            @Html.LabelFor(m => m.Email, new { @class = "col-sm-2 col-md-2 col-lg-2 control-label" })
-                            <div class="col-sm-10 col-md-10 col-lg-10">
+                            @Html.LabelFor(m => m.Email, new { @class = "col-sm-4 col-md-4 col-lg-4 control-label" })
+                            <div class="col-sm-8 col-md-8 col-lg-8">
                                 @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(m => m.Email)
                             </div>
@@ -42,8 +42,8 @@
                     </div>
                     <div class="row">
                         <div class="form-group">
-                            @Html.LabelFor(m => m.Haslo, new { @class = "col-sm-2 col-md-2 col-lg-2 control-label" })
-                            <div class="col-sm-10 col-md-10 col-lg-10">
+                            @Html.LabelFor(m => m.Haslo, new { @class = "col-sm-4 col-md-4 col-lg-4 control-label" })
+                            <div class="col-sm-8 col-md-8 col-lg-8">
                                 @Html.TextBoxFor(m => m.Haslo, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(m => m.Haslo)
                             </div>
@@ -51,8 +51,8 @@
                     </div>
                     <div class="row">
                         <div class="form-group">
-                            @Html.LabelFor(m => m.PotwierdzHaslo, new { @class = "col-sm-2 col-md-2 col-lg-2 control-label" })
-                            <div class="col-sm-10 col-md-10 col-lg-10">
+                            @Html.LabelFor(m => m.PotwierdzHaslo, new { @class = "col-sm-4 col-md-4 col-lg-4 control-label" })
+                            <div class="col-sm-8 col-md-8 col-lg-8">
                                 @Html.TextBoxFor(m => m.PotwierdzHaslo, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(m => m.PotwierdzHaslo)
                             </div>
@@ -60,7 +60,7 @@
                     </div>
                     <div class="buttonFotterContainer">
                         <input type="submit" class="" value="Zarejestruj" />
-                        <input type="submit" class="" value="Resetuj" />
+                        <input type="button" id="resetBtnRejestracja" class="" value="Resetuj" />
                     </div>
                    
                 </form>
@@ -68,10 +68,8 @@
         </div>
     </div>
 
-    @*@Scripts.Render("~/bundles/jquery")*@
-    <script>
-
-    </script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/Scripts/Account")
 
 </body>
 </html>

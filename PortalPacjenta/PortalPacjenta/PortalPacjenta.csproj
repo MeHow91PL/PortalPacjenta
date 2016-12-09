@@ -173,11 +173,10 @@
     <Content Include="Content\Images\userIcon.png" />
     <Content Include="Content\index.css" />
     <Content Include="Content\KartaLogowania.css" />
-    <Content Include="Content\KartaRezerwacjiPortalPacjentaNiezalogowany.css" />
+    <Content Include="Content\KartaRezerwacji.css" />
     <Content Include="Content\KartaRezerwacjiPrzychodnia.css" />
     <Content Include="Content\Pacjenci.css" />
-    <Content Include="Content\PortalPacjenta.css" />
-    <Content Include="Content\Przychodnia.css" />
+    <Content Include="Content\Layout.css" />
     <Content Include="Content\RejestracjaOnline.css" />
     <Content Include="Content\reset.css" />
     <Content Include="Content\RobotoFont.css" />
@@ -220,6 +219,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Infrastructure\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Scripts\Account.js" />
     <Content Include="Scripts\ai.0.22.19-build00125.js" />
     <Content Include="Scripts\ai.0.22.19-build00125.min.js" />
     <Content Include="Scripts\ai.1.0.4-build00190.js" />
@@ -242,6 +242,7 @@
     <Content Include="Scripts\Przychodnia.js" />
     <Content Include="Scripts\RejestracjaOnline.js" />
     <Content Include="Scripts\Terminarz.js" />
+    <Content Include="Scripts\Walidacje.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -263,6 +264,10 @@
     <Compile Include="Migrations\201612072101091_init.cs" />
     <Compile Include="Migrations\201612072101091_init.Designer.cs">
       <DependentUpon>201612072101091_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612090047320_rejonline.cs" />
+    <Compile Include="Migrations\201612090047320_rejonline.Designer.cs">
+      <DependentUpon>201612090047320_rejonline.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Adres.cs" />
@@ -311,6 +316,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Account\Rejestracja.cshtml" />
+    <Content Include="Views\RejestracjaOnline\KartaRezerwacji.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -324,6 +330,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201612072101091_init.resx">
       <DependentUpon>201612072101091_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612090047320_rejonline.resx">
+      <DependentUpon>201612090047320_rejonline.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
