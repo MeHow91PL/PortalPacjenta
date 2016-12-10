@@ -105,9 +105,9 @@ function WalidujPesel(pesel) {
 
     //plec
     if (parseInt(pesel.substring(9, 10), 10) % 2 === 1) {
-        var plec = 'm';
+        var plec = 'M';
     } else {
-        var plec = 'k';
+        var plec = 'K';
     }
 
     //zwraca obiekt z info o walidacji, płci i daty urodzenia

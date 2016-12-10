@@ -226,6 +226,8 @@
     <Content Include="Scripts\ai.1.0.4-build00190.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Properties\PublishProfiles\PortalPacjenta4 - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\PortalPacjenta4 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
@@ -261,13 +263,13 @@
     <Compile Include="Infrastructure\Mapa.cs" />
     <Compile Include="Infrastructure\PortalPacjentaMasterController.cs" />
     <Compile Include="Infrastructure\PrzychodniaMasterController.cs" />
-    <Compile Include="Migrations\201612061914292_InitPortal.cs" />
+    <Compile Include="Migrations\201612100128042_RezerwacjaEdit.cs" />
     <Compile Include="Migrations\201612061914292_InitPortal.Designer.cs">
-      <DependentUpon>201612061914292_InitPortal.cs</DependentUpon>
+      <DependentUpon>201612100128042_RezerwacjaEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201612090047320_rejonline.cs" />
-    <Compile Include="Migrations\201612090047320_rejonline.Designer.cs">
-      <DependentUpon>201612090047320_rejonline.cs</DependentUpon>
+    <Compile Include="Migrations\201612100150429_RezerwacjaEditl.cs" />
+    <Compile Include="Migrations\201612100150429_RezerwacjaEditl.Designer.cs">
+      <DependentUpon>201612100150429_RezerwacjaEditl.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Adres.cs" />
@@ -329,10 +331,10 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201612061914292_InitPortal.resx">
-      <DependentUpon>201612061914292_InitPortal.cs</DependentUpon>
+      <DependentUpon>201612100128042_RezerwacjaEdit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612090047320_rejonline.resx">
-      <DependentUpon>201612090047320_rejonline.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201612100150429_RezerwacjaEditl.resx">
+      <DependentUpon>201612100150429_RezerwacjaEditl.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

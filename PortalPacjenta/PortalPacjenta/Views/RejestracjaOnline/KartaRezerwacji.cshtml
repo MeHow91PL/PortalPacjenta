@@ -2,27 +2,29 @@
 
 
 <div id="kartaRezerwacjiWizyty" class="kontenerOkienka">
-    <form id="formularzKartyRezerwacji" method="post" action="@Url.Action("ZapiszRezerwacje","RejestracjaOnline")">
+    <form id="formularzKartyRezerwacji" method="post" onsubmit="return zapiszKarteRezerwacji()" action="@Url.Action("ZapiszRezerwacje")">
         <div class="row">
             <div class="col-lg-8 col-md-8 col-sm-8">
                 <div class="col-lg-6 col-md-6 col-sm-6">
-                    @Html.LabelFor(m => m.Pacjent.Imie)
-                    @Html.TextBoxFor(m => m.Pacjent.Imie, new { @class = "form-control", @autocomplete = "off" })
+                    @Html.LabelFor(m => m.Pacjent.Imie)*
+                    @Html.TextBoxFor(m => m.Pacjent.Imie, new { @class = "form-control", @onkeyup = "ImieVal()" })
+                    <span class="errorMessage" id="imieErrorMessageSpan"></span>
                     @Html.ValidationMessageFor(m => m.Pacjent.Imie)
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
-                    @Html.LabelFor(m => m.Pacjent.Nazwisko)
-                    @Html.TextBoxFor(m => m.Pacjent.Nazwisko, new { @class = "form-control", @autocomplete = "off" })
+                    @Html.LabelFor(m => m.Pacjent.Nazwisko)*
+                    @Html.TextBoxFor(m => m.Pacjent.Nazwisko, new { @class = "form-control", @onkeyup = "NazwiskoVal()" })
+                    <span class="errorMessage" id="nazwiskoErrorMessageSpan"></span>
                     @Html.ValidationMessageFor(m => m.Pacjent.Nazwisko)
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
-                    @Html.LabelFor(m => m.Pacjent.Pesel)
-                    @Html.TextBoxFor(m => m.Pacjent.Pesel, new { @class = "form-control", @onkeyup = "walidujKarteRezerwacji()", @autocomplete = "off" })
+                    @Html.LabelFor(m => m.Pacjent.Pesel)*
+                    @Html.TextBoxFor(m => m.Pacjent.Pesel, new { @class = "form-control", @onkeyup = "PeselVal()", @autocomplete = "off" })
                     <span class="errorMessage" id="peselErrorMessageSpan"></span>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
-                    @Html.LabelFor(m => m.Pacjent.DokumentTozsamosci)
-                    @Html.TextBoxFor(m => m.Pacjent.DokumentTozsamosci, new { @class = "form-control", @autocomplete = "off", @placeholder = "np. ABC123456", @onkeyup = "walidujKarteRezerwacji()" })
+                    @Html.LabelFor(m => m.Pacjent.DokumentTozsamosci)*
+                    @Html.TextBoxFor(m => m.Pacjent.DokumentTozsamosci, new { @class = "form-control", @autocomplete = "off", @placeholder = "np. ABC123456", @onkeyup = "DokumentVal()" })
                     <span class="errorMessage" id="dokTozsamosciErrorMessageSpan"></span>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
@@ -35,13 +37,15 @@
                     @Html.TextBoxFor(m => m.Pacjent.Email, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.Pacjent.Email)
                 </div><div class="col-lg-6 col-md-6 col-sm-6">
-                    @Html.LabelFor(m => m.Rezerwacja.godzOd)
-                    @Html.TextBoxFor(m => m.Rezerwacja.godzOd, new { @class = "form-control" })
+                    @Html.LabelFor(m => m.Rezerwacja.godzOd)*
+                    @Html.TextBoxFor(m => m.Rezerwacja.godzOd, new { @class = "form-control", @onkeyup = "GodzinaVal()" })
+                    <span class="errorMessage" id="godzinaErrorMessageSpan"></span>
                     @Html.ValidationMessageFor(m => m.Rezerwacja.godzOd)
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
-                    @Html.LabelFor(m => m.Rezerwacja.DataRezerwacji)
-                    @Html.TextBoxFor(m => m.Rezerwacja.DataRezerwacji, "{0:yyyy-MM-dd}", new { @class = "form-control" })
+                    @Html.LabelFor(m => m.Rezerwacja.DataRezerwacji)*
+                    @Html.TextBoxFor(m => m.Rezerwacja.DataRezerwacji, "{0:yyyy-MM-dd}", new { @class = "form-control", @readonly = "readonly" })
+                    <span class="errorMessage" id="dataErrorMessageSpan"></span>
                     @Html.ValidationMessageFor(m => m.Rezerwacja.DataRezerwacji)
                 </div>
             </div>
@@ -60,7 +64,7 @@
 
         </div>
         <div class="" id="kartaRezerwacjiButtonKontener">
-            <input type="submit" onclick="zapiszKarteRezerwacji()" class="col-lg-offset-5 col-lg-3 col-md-offset-5 col-md-3 col-sm-offset-5 col-sm-3" value="Zapisz" />
+            <input type="submit" class="col-lg-offset-5 col-lg-3 col-md-offset-5 col-md-3 col-sm-offset-5 col-sm-3" value="Zapisz" />
             <input type="button" class="col-lg-offset-1 col-lg-3 col-md-offset-1 col-md-3 col-sm-offset-1 col-sm-3" value="Anuluj" />
         </div>
     </form>
@@ -68,5 +72,118 @@
 </div>
 
 <script>
-  
+    function zapiszKarteRezerwacji() {
+
+        if (ImieVal() && NazwiskoVal() && PeselVal() && DokumentVal() && GodzinaVal) {
+            return true;
+        }
+        return false;
+    }
+
+    function ImieVal() {
+        if ($.trim($("#Pacjent_Imie").val()).length === 0) {
+            $("#imieErrorMessageSpan").html("Muszisz podać imię!");
+            return false;
+        }
+        else {
+            $("#imieErrorMessageSpan").html("");
+        }
+        return true;
+    }
+
+    function NazwiskoVal() {
+        if ($.trim($("#Pacjent_Nazwisko").val()).length === 0) {
+            $("#nazwiskoErrorMessageSpan").html("Muszisz podać nazwisko!");
+            return false;
+        }
+        else {
+            $("#nazwiskoErrorMessageSpan").html("");
+
+        }
+        return true;
+    }
+
+    //function DataoVal() {
+    //    if ($.trim($("#Rezerwacja_DataRezerwacji").val()).length === 0) {
+    //        $("#dataErrorMessageSpan").html("Muszisz podać datę!");
+    //        return false;
+    //    }
+    //    else {
+    //        $("#dataErrorMessageSpan").html("");
+    //    }
+
+    //    var wzor = /^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/;
+    //    console.log(wzor);
+    //    if (wzor.test($("#Rezerwacja_DataRezerwacji").val())) {
+    //        $("#dataErrorMessageSpan").html("Data musi być w formacie : 2016-12-09");
+    //        return false;
+    //    }
+    //    else {
+    //        $("#dataErrorMessageSpan").html("");
+    //    }
+    //    return true;
+    //}
+
+    function GodzinaVal() {
+        if ($.trim($("#Rezerwacja_godzOd").val()).length === 0) {
+            $("#godzinaErrorMessageSpan").html("Muszisz podać godzinę!");
+            return false;
+        }
+        else {
+            $("#godzinaErrorMessageSpan").html("");
+        }
+
+        var wzor = /^[0-9]{2}:[0-9]{2}$/;
+
+        if (wzor.test($("#Rezerwacja_godzOd").val())) {
+            $("#dataErrorMessageSpan").html("Godzina musi być w formacie : 08:00");
+            return false;
+        }
+        else {
+            $("#dataErrorMessageSpan").html("");
+        }
+        return true;
+    }
+
+    function PeselVal() {
+        var valid = true;
+        var numerPesel = $('#Pacjent_Pesel');
+        var numerPeselErrorSpan = $('#peselErrorMessageSpan');
+        var poWalidacji = WalidujPesel(numerPesel.val());
+
+        if ($.trim(numerPesel.val()).length === 0) {
+            numerPeselErrorSpan.html("Numer PESEL jest wymagany!");
+            valid = false;
+        }
+        else if (!poWalidacji.valid) {
+            numerPeselErrorSpan.html("Podany PESEL jest niepoprawny!");
+            valid = false;
+        }
+        else {
+            $('#Pacjent_Plec').val(poWalidacji.plec);
+            numerPeselErrorSpan.html("");
+        }
+        return valid;
+    }
+
+    function DokumentVal() {
+        var valid = true;
+
+        var dokTozsamosci = $('#Pacjent_DokumentTozsamosci');
+        var dokTozsamosciErrorSpan = $('#dokTozsamosciErrorMessageSpan');
+        var validDokument = walidujDokTozsamosci(dokTozsamosci.val());
+
+        if ($.trim(dokTozsamosci.val()).length === 0) {
+            dokTozsamosciErrorSpan.html("Dokument tożsamości jest wymagany!");
+            valid = false;
+        }
+        else if (!validDokument.valid) {
+            dokTozsamosciErrorSpan.html("Podany dokument tożsamości jest błędny! Poprawny format: {Seria}{Numer} ABC123456");
+            valid = false;
+        }
+        else {
+            dokTozsamosciErrorSpan.html("");
+        }
+        return valid;
+    }
 </script>
