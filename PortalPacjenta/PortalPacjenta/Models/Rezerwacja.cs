@@ -10,11 +10,6 @@ namespace PortalPacjenta.Models
     [Table("Rezerwacje")]
     public class Rezerwacja
     {
-        public Rezerwacja()
-        {
-            Stat = "R";
-        }
-
         [ScaffoldColumn(false)]
         public int Id { get; set; }
 
@@ -29,7 +24,7 @@ namespace PortalPacjenta.Models
         public string godzDo { get; set; }
 
         [Display(Name = "Data ost. mod.")]
-        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}",ApplyFormatInEditMode = true)]
         public DateTime DataModyfikacji { get; set; }
 
         public int PracownikID { get; set; }
@@ -37,8 +32,5 @@ namespace PortalPacjenta.Models
 
         public virtual Pracownik Pracownik { get; set; }
         public virtual Pacjent Pacjent { get; set; }
-
-        [MaxLength(1)]
-        public string Stat { get; set; }
     }
 }
