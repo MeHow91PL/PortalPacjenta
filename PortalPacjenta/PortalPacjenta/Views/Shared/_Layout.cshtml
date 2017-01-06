@@ -1,6 +1,5 @@
-﻿
-@{
-    ViewBag.Title = "SOPeL";
+﻿@{
+    ViewBag.Title = "";
     Layout = null;
 }
 
@@ -28,6 +27,12 @@
                         <a href="@Url.Action("Index","RejestracjaOnline")" id="RejestacjaOnline">
                             <img class="img-responsive" src="~/Content/Images/unnamed.png" alt="Zarejestruj" />
                             <span>Umów wizytę</span>
+                        </a>
+                    </li>
+                    <li id="Terminarz-Sidebar">
+                        <a href="@Url.Action("Index","HistoriaWizyt")" id="HistoriaWizyt">
+                            <img class="img-responsive" src="~/Content/Images/HistoriaWizytIcon.png" alt="Historia wizyt" />
+                            <span>Historia wizyt</span>
                         </a>
                     </li>
 
