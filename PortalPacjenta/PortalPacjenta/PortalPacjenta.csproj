@@ -264,6 +264,10 @@
     <Compile Include="Infrastructure\Mapa.cs" />
     <Compile Include="Infrastructure\PortalPacjentaMasterController.cs" />
     <Compile Include="Infrastructure\PrzychodniaMasterController.cs" />
+    <Compile Include="Migrations\201701061837493_iinin.cs" />
+    <Compile Include="Migrations\201701061837493_iinin.Designer.cs">
+      <DependentUpon>201701061837493_iinin.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Adres.cs" />
     <Compile Include="Models\ICD10.cs" />
@@ -322,6 +326,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201701061837493_iinin.resx">
+      <DependentUpon>201701061837493_iinin.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
