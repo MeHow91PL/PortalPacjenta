@@ -4,24 +4,20 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
-using static PortalPacjenta.Infrastructure.Enums;
+using System.Web.Mvc;
 
 namespace PortalPacjenta.Models
 {
-    [Table("Rezerwacje")]
-    public class Rezerwacja
-    {
-        public Rezerwacja()
-        {
-            Stat = Status.Rezerwacja;
-        }
 
+    [Table("Wizyty")]
+    public class Wizyta : ICloneable
+    {
         [ScaffoldColumn(false)]
         public int Id { get; set; }
 
         [DataType(DataType.Date)]
         [Display(Name = "Data")]
-        public DateTime DataRezerwacji { get; set; }
+        public DateTime DataWizyty { get; set; }
 
         [Display(Name = "Godzina od")]
         public string godzOd { get; set; }
@@ -33,15 +29,37 @@ namespace PortalPacjenta.Models
         [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DataModyfikacji { get; set; }
 
-        public Status Stat { get; set; }
-        public Aktywny Aktw { get; set; }
-
-
         public int PracownikID { get; set; }
         public int PacjentID { get; set; }
+        public int? RezerwacjaId { get; set; }
 
         public virtual Pracownik Pracownik { get; set; }
         public virtual Pacjent Pacjent { get; set; }
+        public virtual Rezerwacja Rezerwacja { get; set; }
 
+
+
+        [Display(Name = "Rozpoznanie")]
+        public string Rozpoznanie { get; set; }
+
+        [Display(Name = "Badadnie")]
+        public string Badanie { get; set; }
+
+        [Display(Name = "Wywiad")]
+        public string Wywiad { get; set; }
+
+        [Display(Name = "Zalecenia")]
+        public string Zalecenia { get; set; }
+
+        [Display(Name = "Leki")]
+        public string Leki { get; set; }
+
+        [Display(Name = "Skierowanie")]
+        public string Skierowanie { get; set; }
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
     }
 }

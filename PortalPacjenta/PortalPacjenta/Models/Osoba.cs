@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using static PortalPacjenta.Infrastructure.Enums;
 
 namespace PortalPacjenta.Models
 {
     public abstract class Osoba
     {
 
-        
         [ScaffoldColumn(false)]
         public int ID { get; set; }
 
@@ -34,15 +34,11 @@ namespace PortalPacjenta.Models
         [MaxLength(100)]
         public string Email { get; set; }
 
-
         public virtual Adres Adres { get; set; }
 
         public virtual Adres AdresTymczasowy { get; set; }
 
-
-        [MaxLength(1)]
-        
-        public string Aktw { get; set; }
+        public Aktywny Aktw { get; set; }
 
     }
 }

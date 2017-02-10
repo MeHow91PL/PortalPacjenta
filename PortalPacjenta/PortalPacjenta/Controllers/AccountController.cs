@@ -112,7 +112,7 @@ namespace PortalPacjenta.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Login, Email = model.Email};
+                var user = new ApplicationUser  { UserName = model.Login, Email = model.Email, Pesel=model.Pesel};
                 var result = await UserManager.CreateAsync(user, model.Haslo);
                 if (result.Succeeded)
                 {

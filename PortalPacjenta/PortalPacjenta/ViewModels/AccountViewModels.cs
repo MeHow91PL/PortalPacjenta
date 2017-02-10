@@ -40,6 +40,11 @@ namespace PortalPacjenta.ViewModels
         [Display(Name = "Email")]
         public string Email { get; set; }
 
+
+        [Required]
+        [Display(Name = "Pesel")]
+        public string Pesel { get; set; }
+
         [Required]
         [StringLength(100, ErrorMessage = "Hasło musi mieć przynajmniej 8 znaków.")]
         [DataType(DataType.Password)]

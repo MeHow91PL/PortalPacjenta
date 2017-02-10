@@ -6,7 +6,8 @@ using System.Web;
 
 namespace PortalPacjenta.Models
 {
-    public class UserData
+    public class UserData 
+
     {
         [ScaffoldColumn(false)]
         public int Id { get; set; }

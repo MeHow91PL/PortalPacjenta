@@ -42,6 +42,15 @@
                     </div>
                     <div class="row">
                         <div class="form-group">
+                            @Html.LabelFor(m => m.Pesel, new { @class = "col-sm-4 col-md-4 col-lg-4 control-label" })
+                            <div class="col-sm-8 col-md-8 col-lg-8">
+                                @Html.TextBoxFor(m => m.Pesel, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Pesel)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
                             @Html.LabelFor(m => m.Haslo, new { @class = "col-sm-4 col-md-4 col-lg-4 control-label" })
                             <div class="col-sm-8 col-md-8 col-lg-8">
                                 @Html.TextBoxFor(m => m.Haslo, new { @class = "form-control" })

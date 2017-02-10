@@ -1,0 +1,47 @@
+﻿@model PortalPacjenta.ViewModels.HistoriaViewModel
+
+<div class="przychodnia">
+    <table class="table table-striped terminarz" id="TabelaWizyty">
+
+
+        @{
+            <tr>
+                <td class="DaneWizyta">Dane Pacjenta</td>
+                <td class="DaneWizyta">Godzina</td>
+                <td class="DaneWizyta">Data</td>
+                <td class="DaneWizyta">Lekarz</td>
+                
+                <td class="DaneWizyta">Wyświetl Wizytę</td>
+                
+            </tr>
+           
+            foreach (var item in Model.wizyty)
+            {
+                
+               
+                //if (@item.DataRezerwacji.ToShortDateString() == DateTime.Now.ToShortDateString())
+                {
+                    <tr>
+                        <td class="DanePacjentaWizyta">@item.Pacjent.Nazwisko  @item.Pacjent.Imie <br /> @item.Pacjent.Pesel</td>
+                        <td class="DaneWizyta">@item.godzOd</td>
+                        <td class="DaneWizyta">@item.DataWizyty.ToShortDateString()</td>
+                        <td class="DaneWizyta">@item.Pracownik.Nazwisko @item.Pracownik.Imie</td>
+                       
+                        <td class="HistoriaWyswietl">
+                            <div data-idwiz="@item.Id" class="dodajWizyte wyswietlHistorie button button-blue">
+                                
+                               
+                                <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>Wyświetl</button>
+
+                            </div>
+                        </td>
+                        
+                    </tr>
+                }
+            }
+        }
+
+
+
+    </table>
+</div>
